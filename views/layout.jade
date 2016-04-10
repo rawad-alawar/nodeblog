@@ -1,7 +1,18 @@
 doctype html
 html
   head
-    title= title
+    title NodeBlog
     link(rel='stylesheet', href='/stylesheets/style.css')
   body
-    block content
+    .container
+      img.logo(src='https://community-cdn-digitalocean-com.global.ssl.fastly.net/assets/tutorials/images/large/NODE_js_tw.png?1426699784')
+      nav
+        ul
+          li
+            a(href='/') Home
+          li
+            a(href='/posts/add') Add Post
+          li
+            a(href='/categories/add') Add Category
+      !=messages()
+      block content

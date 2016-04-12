@@ -25,13 +25,13 @@ router.post('/add', function(req, res, next){
     var author   = req.body.author;
     var date     = new Date();
 
-    if(req.files && req.files.mainimage){
-        var mainImageOriginalName = req.files.mainimage.originalname;
-        var mainImageName         = req.files.mainimage.name;
-        var mainImageMime         = req.files.mainimage.mimetype;
-        var mainImagePath         = req.files.mainimage.path;
-        var mainImageExt          = req.files.mainimage.extension;
-        var mainImageSize         = req.files.mainimage.size;
+    if(req.files && req.files.image){
+        var mainImageOriginalName = req.files.image.originalname;
+        var mainImageName         = req.files.image.name;
+        var mainImageMime         = req.files.image.mimetype;
+        var mainImagePath         = req.files.image.path;
+        var mainImageExt          = req.files.image.extension;
+        var mainImageSize         = req.files.image.size;
     } else {
         var mainImageName = 'noimage.png';
     }

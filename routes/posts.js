@@ -25,7 +25,7 @@ router.post('/add', function(req, res, next){
     var author   = req.body.author;
     var date     = new Date();
 
-    if(req.files.mainimage){
+    if(req.files && req.files.mainimage){
         var mainImageOriginalName = req.files.mainimage.originalname;
         var mainImageName         = req.files.mainimage.name;
         var mainImageMime         = req.files.mainimage.mimetype;

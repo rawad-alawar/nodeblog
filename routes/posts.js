@@ -19,6 +19,7 @@ router.get('/add',function(req, res, next){
 
 router.post('/add', function(req, res, next){
     // Ger form values
+    
     var title    = req.body.title;
     var category = req.body.category;
     var body     = req.body.body;

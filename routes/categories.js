@@ -4,7 +4,50 @@ var mongo = require('mongodb')
 var db = require('monk')('localhost/nodeblog')   //name of our db is localhost/nodeblog
 
 
-router.get('/', function(req, res, next) {
+router.get('/add', function(req, res, next) {
+  res.render('addcategory', {
+    "title": "Add Category"             //passes in a title called Add Category
+  })
+});
+
+router.post('/add', function(req, res, next){
+    // Get form values
+    var title    = req.body.title;
+
+
+    // Form Validation
+
+    req.checkBody('title', 'Title field is required').notEmpty();
+
+
+    // Check Errors
+
+    var errors = req.validationErrors();
+
+    if(errors){
+        res.render('addcategory', {
+            "erors": errors,
+            "title": title
+
+        });
+    } else {
+        var categories = db.get('categories');
+
+        // Submit to db
+        categories.insert({
+            "title": title
+        }, function(err, category){
+            if(err){
+                res.send('There was an issue submitting the category');
+            } else {
+                req.flash('success', 'Category Submitted');
+                res.location('/');
+                res.redirect('/');
+            }
+        });
+    }
+
 
 });
+
 module.exports = router;

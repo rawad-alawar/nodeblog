@@ -8,7 +8,7 @@ router.get('/show/:id', function(req,res, next){
   var id = req.params.id
   posts.findById(id, function(err, post){
   res.render('show',{
-    "post": post,
+    "post": post
 
     })
   })
@@ -87,4 +87,61 @@ router.post('/add', function(req, res, next){
 
 
 });
+
+router.post('/addcomment', function(req, res, next){
+    // Ger form values
+
+    var name            = req.body.name;
+    var email           = req.body.email;
+    var body            = req.body.body;
+    var postid          = req.body.postid;
+    var commentdate     = new Date();
+
+
+
+    // Form Validation
+
+    req.checkBody('name', 'Name field is required').notEmpty();
+    req.checkBody('body','Body field is required').notEmpty();
+    req.checkBody('email', 'Email field is required').notEmpty();
+    req.checkBody('email', 'Email is not formatted correclty').isEmail();
+
+    // Check Errors
+
+    var errors = req.validationErrors();
+
+    if(errors){
+        var posts = db.get('posts')
+        posts.findById(postid, function(err, post){
+          res.render('show', {
+              "errors": errors,
+              "post": post
+          });
+        })
+
+    } else {
+        var comment = {'name': name, 'email': email, 'body': body, 'commentdate': commentdate}
+        var posts = db.get('posts')
+
+        // Submit to db
+        posts.update({
+                  "_id": postid
+              },{
+                  $push:{
+                      "comments": comment
+                  }
+              }, function(err, doc){
+                  if(err){
+                      throw err;
+                  } else {
+                      req.flash('success', 'Comment Added');
+                      res.location('/posts/show/'+postid);
+                      res.redirect('/posts/show/'+postid);
+                  }
+              });
+
+          }
+
+      });
+
 module.exports = router;

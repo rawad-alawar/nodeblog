@@ -74,6 +74,10 @@ nav a.current, nav a:hover{
   background: #ccc;
 }
 
+.show img{
+  width: 100%;
+}
+
 a.more {
   display: block;
   width: 80px;
@@ -116,6 +120,7 @@ textarea{
 .post img{
   width: 100%;
 }
+
 
 .alert{
   padding: 15px;

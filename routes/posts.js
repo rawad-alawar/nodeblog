@@ -3,6 +3,17 @@ var router = express.Router();
 var mongo = require('mongodb')
 var db = require('monk')('localhost/nodeblog')   //name of our db is localhost/nodeblog
 
+router.get('/show/:id', function(req,res, next){
+  var posts = db.get('posts')
+  var id = req.params.id
+  posts.findById(id, function(err, post){
+  res.render('show',{
+    "post": post,
+
+    })
+  })
+})
+
 router.get('/add',function(req, res, next){
   //to list categories in drop down
   var categories = db.get('categories')
@@ -19,7 +30,7 @@ router.get('/add',function(req, res, next){
 
 router.post('/add', function(req, res, next){
     // Ger form values
-    
+
     var title    = req.body.title;
     var category = req.body.category;
     var body     = req.body.body;

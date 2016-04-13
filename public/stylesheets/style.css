@@ -108,6 +108,13 @@ input[type = 'text'], select, textarea{
   border: 1px #ccc solid;
 }
 
+nput[type = 'email'], select, textarea{
+  padding: 3px;
+  height: 20px;
+  width: 200px;
+  border: 1px #ccc solid;
+}
+
 select{
   height: 28px;
 }
@@ -146,4 +153,18 @@ ul.success li {
   background-color: #dff0d8;
   border-color: #d6e9c6;
   list-style: none;
+}
+
+.comment-form{
+  margin: 30px 0;
+}
+.comment{
+  background: #ccc;
+  padding: 5px;
+  border: #666 solid 1px;
+  margin: 15px 0 20px;
+}
+
+.comment-name{
+  font-weight: bold;
 }
